@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui;
+﻿using CommunityToolkit.Maui;
 using eShop.ClientApp.Services;
 using eShop.ClientApp.Services.AppEnvironment;
 using eShop.ClientApp.Services.Basket;
@@ -34,14 +34,10 @@ public static class MauiProgram
             .ConfigureFonts(
                 fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddFont("Font_Awesome_5_Free-Regular-400.otf", "FontAwesome-Regular");
-                    fonts.AddFont("Font_Awesome_5_Free-Solid-900.otf", "FontAwesome-Solid");
+                    fonts.AddFont("FontAwesomeRegular.otf", "FontAwesome-Regular");
+                    fonts.AddFont("FontAwesomeSolid.otf", "FontAwesome-Solid");
                     fonts.AddFont("Montserrat-Bold.ttf", "Montserrat-Bold");
                     fonts.AddFont("Montserrat-Regular.ttf", "Montserrat-Regular");
-                    fonts.AddFont("SourceSansPro-Regular.ttf", "SourceSansPro-Regular");
-                    fonts.AddFont("SourceSansPro-Solid.ttf", "SourceSansPro-Solid");
                 })
             .ConfigureEssentials(
                 essentials =>
@@ -53,10 +49,24 @@ public static class MauiProgram
 #if !WINDOWS
             .UseMauiMaps()
 #endif
+            .ConfigureHandlers()
             .RegisterAppServices()
             .RegisterViewModels()
             .RegisterViews()
             .Build();
+    }
+
+    public static MauiAppBuilder ConfigureHandlers(this MauiAppBuilder mauiAppBuilder)
+    {
+#if IOS || MACCATALYST
+        mauiAppBuilder.ConfigureMauiHandlers(handlers =>
+        {
+            handlers.AddHandler<Microsoft.Maui.Controls.CollectionView, Microsoft.Maui.Controls.Handlers.Items2.CollectionViewHandler2>();
+            handlers.AddHandler<Microsoft.Maui.Controls.CarouselView, Microsoft.Maui.Controls.Handlers.Items2.CarouselViewHandler2>();
+        });
+#endif
+
+        return mauiAppBuilder;
     }
 
     public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)

@@ -22,6 +22,7 @@ var launchProfileName = ShouldUseHttpForEndpoints() ? "http" : "https";
 // Services
 var identityApi = builder.AddProject<Projects.Identity_API>("identity-api", launchProfileName)
     .WithExternalHttpEndpoints()
+    //.WithHttpsEndpoint(port: 9999, name: "dashboard")
     .WithReference(identityDb);
 
 var identityEndpoint = identityApi.GetEndpoint(launchProfileName);
@@ -33,6 +34,7 @@ var basketApi = builder.AddProject<Projects.Basket_API>("basket-api")
 
 var catalogApi = builder.AddProject<Projects.Catalog_API>("catalog-api")
     .WithReference(rabbitMq).WaitFor(rabbitMq)
+    .WithEndpoint(port: 50124, scheme: "https", name: "todo")//配置命名端点
     .WithReference(catalogDb);
 
 var orderingApi = builder.AddProject<Projects.Ordering_API>("ordering-api")
@@ -59,6 +61,7 @@ builder.AddProject<Projects.Mobile_Bff_Shopping>("mobile-bff")
     .WithReference(catalogApi)
     .WithReference(orderingApi)
     .WithReference(basketApi)
+    //.WithReference(basketApi.GetEndpoint("http"))//只使用来自 basket 的默认 http 端点
     .WithReference(identityApi);
 
 // Apps

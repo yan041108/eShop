@@ -10,6 +10,7 @@ public class CatalogService(HttpClient httpClient) : ICatalogService
 
     public Task<CatalogItem?> GetCatalogItem(int id)
     {
+        //var httpClient2 = builder.Services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>().CreateClient("todo");
         var uri = $"{remoteServiceBaseUrl}items/{id}";
         return httpClient.GetFromJsonAsync<CatalogItem>(uri);
     }

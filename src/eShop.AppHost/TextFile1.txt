@@ -1,6 +1,8 @@
 ﻿*.AppHost项目负责充当协调器，并将IsAspireHost项目文件的属性设置为true
 
 
+了解 .NET Aspire 工具
+https://learn.microsoft.com/zh-cn/training/modules/introduction-dotnet-aspire/4-learn-about-tools?ns-enrollment-type=learningpath&ns-enrollment-id=learn.dotnet-aspire
 
 .NET Aspire是一个独立的云原生应用开发框架。云原生应用通常由多种中间组件，资源和微服务组成，.NET Aspire提供了一些解决特定云原生问题的能力：
 
@@ -53,14 +55,14 @@ pgvector是一款开源的PostgreSQL扩展，充当着向量数据的管家，�
 
 
 
+ https://www.cnblogs.com/haogj/p/18110706  .NET Aspire 中的服务发现 
+ https://www.cnblogs.com/vipwan/p/18129361   .NET服务发现(Microsoft.Extensions.ServiceDiscovery)集成Consul
+ https://blog.51cto.com/u_8130830/10354331  入门 .NET Aspire: 使用 .NET 简化云原生应用开发 
 
 
 
 
-
-
-
-
+ WithReference() 调用指示 .NET Aspire 应用为引用的服务 (catalog 和 basket) 传递服务发现信息到 frontend 项目中
 
 
 
@@ -73,5 +75,11 @@ pgvector是一款开源的PostgreSQL扩展，充当着向量数据的管家，�
 *.ServiceDefaults项目是一个共享项目，用于管理在解决方案中的项目中重复使用的配置。该项目确保所有依赖服务共享相同的弹性、服务发现和 OpenTelemetry 配置。共享 .NET Aspire 项目文件包含IsAspireSharedProject设置为的属性true：
 
 ServiceDefaults，它提供包括服务发现、遥测和运行状况检查终结点在内的功能。包括一个开发人员仪表板，其中列出了服务、收集和显示日志，并显示了应用程序各部分的指标和跟踪。
+服务发现
+构建任何分布式应用程序的关键部分是调用远程服务的能力。作为 .NET Aspire 的一部分，我们构建了一个新的服务发现库 Microsoft.Extensions.ServiceDiscovery。此库提供客户端服务发现和负载均衡的核心抽象和各种实现，可实现与 HttpClientFactory 和 YARP 的无缝集成，以及在已部署的 Kuberentes 和 Azure 容器应用环境中的无缝集成。
+-----------------------------------
+©著作权归作者所有：来自51CTO博客作者郝冠军的原创作品，请联系作者获取转载授权，否则将追究法律责任
+入门 .NET Aspire: 使用 .NET 简化云原生应用开发
+https://blog.51cto.com/u_8130830/10354331
 
 遥测基于用于创建和管理遥测数据的 Open Telemetry [4]项目，然后可以将这些数据传递给各种工具。Open Telemetry 得到了大约 40 家供应商的支持，包括 Grafana、Splunk、New Relic、Datadog 和 Dynatrace 等熟悉的名字，以及 Jaeger 和 Prometheus 等开源项目。

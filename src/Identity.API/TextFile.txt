@@ -24,10 +24,10 @@ https://localhost:7298/signin-oidc?code=CEDE6FB6EFB40ABA886A202641AD060DB4ABF61C
 
 
 Callback
-https://identityserver/connect/token?grant_type=authorization_code&code={code}&redirect_uri={authRequest.ReturnUrl}&client_id={authRequest.ClientId}&client_secret={authRequest.ClientSecret}
+https://identityserver/connect/token?grant_type=authorization_code&code={code}&redirect_uri={authRequest.ReturnUrl}&client_id={authRequest.ClientId}&client_secret={authRequest.ClientSecret}&scope=basket
 
 
-https://localhost:5243/connect/token?grant_type=authorization_code&code=CEDE6FB6EFB40ABA886A202641AD060DB4ABF61C2AD09C7AF0986D1A9B0C97DD-1&redirect_uri=https%3A%2F%2Flocalhost%3A7298%2Fsignin-oidc&client_id=webapp&client_secret=secret
+https://localhost:5243/connect/token?grant_type=authorization_code&code=CEDE6FB6EFB40ABA886A202641AD060DB4ABF61C2AD09C7AF0986D1A9B0C97DD-1&redirect_uri=https%3A%2F%2Flocalhost%3A7298%2Fsignin-oidc&client_id=webapp&client_secret=secret&scope=basket
 
 
 
@@ -51,6 +51,7 @@ https://localhost:5243/connect/authorize?client_id=webapp&request_uri=urn%3Aietf
 
 
 https://www.cnblogs.com/cwsheng/p/13611036.html  认证授权：IdentityServer4-简单应用
+https://www.cnblogs.com/easy5weikai/p/17199370.html
 
 
 

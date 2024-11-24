@@ -10,7 +10,8 @@ public class OrderingService(HttpClient httpClient)
     }
 
     public Task CreateOrder(CreateOrderRequest request, Guid requestId)
-    {
+    {  
+        //var httpClient = builder.Services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>().CreateClient("todo");
         var requestMessage = new HttpRequestMessage(HttpMethod.Post, remoteServiceBaseUrl);
         requestMessage.Headers.Add("x-requestid", requestId.ToString());
         requestMessage.Content = JsonContent.Create(request);

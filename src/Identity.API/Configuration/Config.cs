@@ -31,8 +31,8 @@
         {
             return new List<IdentityResource>
             {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.OpenId(),//授权码模式通过在客户端和认证服务器往返的URL来传递数据，使用了 Openid Connect 协议和 OAuth2.0 协议，故得在IdentityServer中配置 Openid 信息, 这是授权码模式必须得添加的
+                new IdentityResources.Profile()//如果需要客户端要求能获取到用户信息，还得添加new IdentityResources.Profile()
             };
         }
 
@@ -87,17 +87,17 @@
                     RequireConsent = false,
                     AllowOfflineAccess = true,
                     AlwaysIncludeUserClaimsInIdToken = true,
-                    RequirePkce = false,
+                    RequirePkce = false,////是否支持授权操作页面，true表示显示授权界面，否则不显示。
                     RedirectUris = new List<string>
                     {
-                        $"{configuration["WebAppClient"]}/signin-oidc"
+                        $"{configuration["WebAppClient"]}/signin-oidc"  ////认证成功之后重定向的客户端地址，默认就是signin-oidc。
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        $"{configuration["WebAppClient"]}/signout-callback-oidc"
+                        $"{configuration["WebAppClient"]}/signout-callback-oidc"  //登出时重定向的地址,默认是signout-oidc。
                     },
                     AllowedScopes = new List<string>
-                    {
+                    {//指定客户端获取的AccessToken能访问到的API作用域。
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OfflineAccess,

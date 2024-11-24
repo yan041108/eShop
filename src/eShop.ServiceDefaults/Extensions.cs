@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Data.Common;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.ServiceDiscovery;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
@@ -17,16 +19,25 @@ public static partial class Extensions
     {
         builder.AddBasicServiceDefaults();
 
-        builder.Services.AddServiceDiscovery();
+
+        builder.Services.Configure<ServiceDiscoveryOptions>(
+    options => options.AllowAllSchemes = true);//要明确允许所有方案，请将ServiceDiscoveryOptions.AllowAllSchemes属性设置为true
+
+       
+
+        builder.Services.AddServiceDiscovery();//配置默认服务端点解析器  此解析器从.NET 配置系统读取端点。该库支持通过appsettings.json、环境变量或任何其他IConfiguration源进行配置。
 
         builder.Services.ConfigureHttpClientDefaults(http =>
         {
             // Turn on resilience by default
             http.AddStandardResilienceHandler();
 
-            // Turn on service discovery by default
+            // Turn on service discovery by default   // 全局对HttpClient启用服务发现
             http.AddServiceDiscovery();
         });
+
+        //var httpClient = builder.Services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>().CreateClient("todo");
+
 
         return builder;
     }

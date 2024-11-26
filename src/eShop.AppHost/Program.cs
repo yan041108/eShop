@@ -34,7 +34,7 @@ var basketApi = builder.AddProject<Projects.Basket_API>("basket-api")
 
 var catalogApi = builder.AddProject<Projects.Catalog_API>("catalog-api")
     .WithReference(rabbitMq).WaitFor(rabbitMq)
-    .WithEndpoint(port: 50124, scheme: "https", name: "todo")//配置命名端点
+    //.WithEndpoint(port: 50124, scheme: "https", name: "todo")//配置命名端点
     .WithReference(catalogDb);
 
 var orderingApi = builder.AddProject<Projects.Ordering_API>("ordering-api")

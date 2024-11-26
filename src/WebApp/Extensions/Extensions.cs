@@ -36,7 +36,7 @@ public static class Extensions
         builder.Services.AddGrpcClient<Basket.BasketClient>(o => o.Address = new("http://basket-api"))
             .AddAuthToken();
 
-        builder.Services.AddHttpClient<CatalogService>(o => o.BaseAddress = new("https://todo"))//todo  catalog-api  new("http://catalog-api")
+        builder.Services.AddHttpClient<CatalogService>(o => o.BaseAddress = new("http://catalog-api"))//todo  catalog-api  new("http://catalog-api")
             .AddApiVersion(1.0)
             .AddAuthToken();
 
